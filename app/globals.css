@@ -1,1 +1,9 @@
 @import "tailwindcss";
+/* ...existing code... */
+body {
+  /* ...existing code... */
+  margin: 0 0;
+  height: auto;
+  /* ...existing code... */
+}
+/* ...existing code... */
