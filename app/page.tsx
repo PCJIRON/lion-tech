@@ -157,7 +157,6 @@ useEffect(() => {
           --s1: #0A1515; --s2: #0D1A1A; --bd: rgba(0,252,252,0.1);
           --bd2: rgba(0,252,252,0.05); --tx: #E4F3F3; --mu: #4E6B6B; --mu2: #324848;
         }
-        *,*::before,*::after { box-sizing:border-box; margin:0; padding:0 }
         html { scroll-behavior:smooth }
         body { background:var(--bg); color:var(--tx); font-family:'DM Sans',sans-serif; font-size:16px; line-height:1.7; overflow-x:hidden; cursor:none }
         ::-webkit-scrollbar { width:3px }
@@ -171,222 +170,73 @@ useEffect(() => {
         body:has(a:hover) #cr, body:has(button:hover) #cr { width:46px; height:46px; border-color:var(--g) }
 
         /* ─── NAV ───────────────────────────────────── */
-        
-        nav { position:fixed; top:0; left:0; right:0; z-index:200; display:flex; align-items:center; justify-content:space-between; padding:22px 56px; transition:padding .3s,background .3s,border-color .3s; border-bottom:1px solid transparent }
+        nav { position:fixed; top:0; left:0; right:0; z-index:200; display:flex; align-items:center; padding:22px 56px; transition:padding .3s,background .3s,border-color .3s; border-bottom:1px solid transparent; justify-content:space-between; gap:32px }
         nav.sc { padding:13px 56px; background:rgba(3,8,8,0.94); backdrop-filter:blur(28px); border-color:var(--bd) }
-        .nl { display:flex; align-items:center; gap:12px; text-decoration:none }
+        .nl { display:flex; align-items:center; gap:12px; text-decoration:none; flex-shrink:0 }
         .nl svg { width:38px; height:38px }
         .nl-t { font-family:'Syne',sans-serif; font-weight:800; font-size:1.1rem; letter-spacing:-.02em; color:var(--tx) }
         .nl-t span { color:var(--c) }
-        .nm { display:flex; align-items:center; gap:36px; list-style:none }
+        .nm { display:flex; align-items:center; gap:36px; list-style:none; flex:1; justify-content:center }
         .nm a { font-family:'Space Mono',monospace; font-size:.67rem; letter-spacing:.14em; text-transform:uppercase; color:var(--mu); text-decoration:none; transition:color .2s; position:relative }
         .nm a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:1px; background:var(--c); transition:width .3s }
         .nm a:hover, .nm a.active { color:var(--c) }
         .nm a:hover::after, .nm a.active::after { width:100% }
-        .nr { display:flex; align-items:center; gap:18px }
-        
-        /* ── Logo ───────────────────────────────── */
-        .nl {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          text-decoration: none;
-          flex-shrink: 0;
-        }
-        .nl-t {
-          font-family: 'Segoe UI', sans-serif;
-          font-size: 1.15rem;
-          font-weight: 700;
-          color: #fff;
-          letter-spacing: 0.04em;
-        }
-        .nl-t span { color: #00FCFC; }
-        /* ── Right Section ──────────────────────── */
-        .nr {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          flex-shrink: 0;
-        }
-          /* ── Search ─────────────────────────────── */
-        .sw { position: relative; }
-        .sb {
-          display: flex;
-          align-items: center;
-          background: rgba(255,255,255,0.06);
-          border: 1px solid rgba(0,252,252,0.2);
-          border-radius: 8px;
-          padding: 6px 12px;
-          gap: 8px;
-        }
-        .si { color: #00FCFC; font-size: 1rem; }
-        .sb input {
-          background: none;
-          border: none;
-          outline: none;
-          color: #fff;
-          font-size: 0.85rem;
-          width: 140px;
-        }
-        .sb input::placeholder { color: rgba(255,255,255,0.35); }
-        #sr { position: absolute; top: 100%; left: 0; right: 0; }
 
-        /* ── CTA Button ─────────────────────────── */
-        .nc {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          padding: 8px 16px;
-          background: #00FCFC;
-          color: #0A1515;
-          font-size: 0.85rem;
-          font-weight: 700;
-          border-radius: 8px;
-          text-decoration: none;
-          white-space: nowrap;
-          transition: opacity 0.2s, transform 0.15s;
-        }
-        .nc:hover { opacity: 0.85; transform: translateY(-1px); }
-
-        /* ── Hamburger Button ───────────────────── */
-        .hb-btn {
-          display: none;          /* desktop par hidden */
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          gap: 5px;
-          width: 40px;
-          height: 40px;
-          background: rgba(0,252,252,0.08);
-          border: 1px solid rgba(0,252,252,0.25);
-          border-radius: 8px;
-          cursor: pointer;
-          flex-shrink: 0;
-          transition: background 0.2s;
-        }
-        .hb-btn:hover { background: rgba(0,252,252,0.15); }
-        .hb-btn span {
-          display: block;
-          width: 20px;
-          height: 2px;
-          background: #00FCFC;
-          border-radius: 2px;
-          transition: transform 0.3s, opacity 0.3s;
-          transform-origin: center;
-        }
-        /* Animate to X when open */
-        .hb-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-        .hb-btn.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-        .hb-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-        /* ── Mobile Drawer ──────────────────────── */
-        .mobile-drawer {
-          display: none;        /* desktop par hidden */
-          position: fixed;
-          top: 64px;
-          left: 0; right: 0;
-          background: #0A1515;
-          border-bottom: 1px solid rgba(0,252,252,0.15);
-          padding: 20px 24px 28px;
-          flex-direction: column;
-          gap: 6px;
-          z-index: 999;
-          transform: translateY(-10px);
-          opacity: 0;
-          pointer-events: none;
-          transition: transform 0.28s ease, opacity 0.28s ease;
-        }
-        .mobile-drawer.open {
-          transform: translateY(0);
-          opacity: 1;
-          pointer-events: all;
-        }
-        .mobile-drawer a {
-          color: rgba(255,255,255,0.8);
-          text-decoration: none;
-          font-size: 1rem;
-          font-weight: 500;
-          padding: 12px 14px;
-          border-radius: 8px;
-          transition: color 0.2s, background 0.2s;
-          display: block;
-        }
-        .mobile-drawer a:hover,
-        .mobile-drawer a.active {
-          color: #00FCFC;
-          background: rgba(0,252,252,0.08);
-        }
-        .drawer-divider {
-          height: 1px;
-          background: rgba(0,252,252,0.1);
-          margin: 10px 0;
-        }
-        .drawer-cta {
-          display: inline-flex !important;
-          justify-content: center;
-          background: #00FCFC !important;
-          color: #0A1515 !important;
-          font-weight: 700 !important;
-          border-radius: 8px;
-          padding: 12px 20px !important;
-          margin-top: 4px;
-        }
-        .drawer-cta:hover {
-          background: #00e0e0 !important;
-          color: #0A1515 !important;
-        }
-
-        /* ── Mobile Search (center) ─────────────── */
-        .mobile-search {
-          display: none;       /* desktop par hidden */
-        }
-
-        /* ════════════════════════════════════════════
-           MOBILE BREAKPOINT  ≤ 768px
-        ════════════════════════════════════════════ */
-        @media (max-width: 768px) {
-          /* Logo text chhupaao */
-          .nl-t { display: none; }
-
-          /* Desktop menu & desktop CTA chhupaao */
-          .nm { display: none; }
-          .nr .nc { display: none; }       /* desktop CTA hide */
-
-          /* Search bar center mein */
-          .nr .sw { display: none; }       /* right wali search hide */
-          .mobile-search {
-            display: flex;
-            flex: 1;
-            justify-content: center;
-            padding: 0 12px;
-          }
-          .mobile-search .sb {
-            width: 100%;
-            max-width: 280px;
-          }
-          .mobile-search .sb input { width: 100%; }
-
-          /* Hamburger dikhao */
-          .hb-btn { display: flex; }
-
-          /* Drawer dikhao jab open ho */
-          .mobile-drawer { display: flex; }
-        }
-
-        /* Search */
-        .sw { position:relative }
-        .sb { display:flex; align-items:center; gap:8px; background:var(--s1); border:1px solid var(--bd); padding:8px 13px; transition:border-color .2s,box-shadow .2s }
+        /* ── Search ─────────────────────────────── */
+        .sw { position:relative; flex-shrink:0 }
+        .sb { display:flex; align-items:center; gap:8px; background:var(--s1); border:1px solid var(--bd); padding:8px 13px; border-radius:8px; transition:border-color .2s,box-shadow .2s }
         .sb:focus-within { border-color:var(--c); box-shadow:0 0 0 3px rgba(0,252,252,0.07) }
         .sb input { background:none; border:none; outline:none; color:var(--tx); font-family:'Space Mono',monospace; font-size:.67rem; width:150px }
         .sb input::placeholder { color:var(--mu2) }
         .si { color:var(--mu); font-size:.85rem }
-        #sr { position:absolute; top:calc(100% + 4px); right:0; background:var(--s1); border:1px solid var(--bd); min-width:280px; display:none; z-index:300 }
+        #sr { position:absolute; top:calc(100% + 4px); right:0; background:var(--s1); border:1px solid var(--bd); min-width:280px; display:none; z-index:300; border-radius:8px }
         #sr.on { display:block }
         .ri { padding:11px 17px; cursor:pointer; border-bottom:1px solid var(--bd2); transition:background .15s }
         .ri:hover { background:rgba(0,252,252,0.04) }
         .ri:last-child { border-bottom:none }
         .rt { font-family:'Syne',sans-serif; font-size:.78rem; color:var(--c) }
         .rd { font-size:.7rem; color:var(--mu); margin-top:2px }
+
+        /* ── Right Section ─────────────────────── */
+        .nr { display:flex; align-items:center; gap:18px; flex-shrink:0 }
+
+        /* ── CTA Button ─────────────────────────── */
+        .nc { font-family:'Space Mono',monospace; font-size:.65rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--bg); background:var(--c); padding:9px 20px; text-decoration:none; transition:background .2s,transform .15s; clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px)) }
+        .nc:hover { background:var(--g); transform:translateY(-1px) }
+
+        /* ── Hamburger Button ───────────────────── */
+        .hb-btn { display:none; flex-direction:column; justify-content:center; align-items:center; gap:5px; width:40px; height:40px; background:rgba(0,252,252,0.08); border:1px solid rgba(0,252,252,0.25); border-radius:8px; cursor:pointer; flex-shrink:0; transition:background .2s; order:5 }
+        .hb-btn:hover { background:rgba(0,252,252,0.15) }
+        .hb-btn span { display:block; width:20px; height:2px; background:#00FCFC; border-radius:2px; transition:transform .3s,opacity .3s; transform-origin:center }
+        .hb-btn.open span:nth-child(1) { transform:translateY(7px) rotate(45deg) }
+        .hb-btn.open span:nth-child(2) { opacity:0; transform:scaleX(0) }
+        .hb-btn.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg) }
+
+        /* ── Mobile Drawer ──────────────────────── */
+        .mobile-drawer { display:none; position:fixed; top:64px; left:0; right:0; background:#0A1515; border-bottom:1px solid rgba(0,252,252,0.15); padding:20px 24px 28px; flex-direction:column; gap:6px; z-index:999; transform:translateY(-10px); opacity:0; pointer-events:none; transition:transform .28s ease,opacity .28s ease }
+        .mobile-drawer.open { transform:translateY(0); opacity:1; pointer-events:all }
+        .mobile-drawer a { color:rgba(255,255,255,0.8); text-decoration:none; font-size:1rem; font-weight:500; padding:12px 14px; border-radius:8px; transition:color .2s,background .2s; display:block }
+        .mobile-drawer a:hover, .mobile-drawer a.active { color:#00FCFC; background:rgba(0,252,252,0.08) }
+        .drawer-divider { height:1px; background:rgba(0,252,252,0.1); margin:10px 0 }
+        .drawer-cta { display:inline-flex !important; justify-content:center; background:#00FCFC !important; color:#0A1515 !important; font-weight:700 !important; border-radius:8px; padding:12px 20px !important; margin-top:4px }
+        .drawer-cta:hover { background:#00e0e0 !important; color:#0A1515 !important }
+
+        /* ════════════════════════════════════════════
+           MOBILE BREAKPOINT  ≤ 768px
+        ════════════════════════════════════════════ */
+        @media (max-width: 768px) {
+          nav { flex-wrap:wrap; padding:13px 16px; gap:12px; justify-content:space-between }
+          .nl { order:1; flex-shrink:0 }
+          .nl-t { display:none }
+          .nm { display:none }
+          .sw { order:3; width:100%; min-width:100%; flex-basis:100%; padding-top:10px; border-top:1px solid var(--bd2) }
+          .sb { width:100% }
+          .sb input { width:calc(100% - 28px) }
+          .nr { order:2; gap:12px; margin-left:auto }
+          .nr .nc { display:none }
+          .hb-btn { display:flex }
+          .mobile-drawer { display:flex }
+        }
 
         /* CTA btn */
         .nc { font-family:'Space Mono',monospace; font-size:.65rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--bg); background:var(--c); padding:9px 20px; text-decoration:none; transition:background .2s,transform .15s; clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px)) }
@@ -660,7 +510,7 @@ useEffect(() => {
             <path d="M66.4695 22.3353C75.1887 14.083 79.5483 9.95683 84.5708 7.01045C89.0246 4.39773 93.8494 2.47655 98.8801 1.3126C104.553 0 110.556 0 122.561 0H350.28C361.554 0 367.191 0 372.554 1.16752C377.31 2.20309 381.893 3.91425 386.165 6.24892C390.98 8.88104 395.238 12.5753 403.754 19.9638L450.875 60.8446C461.222 69.8222 466.396 74.3111 470.111 79.7493C473.404 84.5684 475.844 89.9168 477.327 95.5617C479 101.932 479 108.781 479 122.481V280.368C479 292.268 479 298.218 477.709 303.847C476.564 308.838 474.673 313.629 472.101 318.057C469.201 323.051 465.138 327.397 457.012 336.091L347.617 453.122C338.702 462.659 334.245 467.427 328.954 470.844C324.265 473.872 319.11 476.11 313.695 477.468C307.586 479 301.059 479 288.005 479H212.062C200.261 479 194.36 479 188.773 477.729C183.819 476.601 179.06 474.739 174.656 472.205C169.69 469.348 165.356 465.343 156.687 457.335L26.225 336.798C16.5628 327.871 11.7317 323.407 8.26913 318.092C5.20004 313.382 2.93099 308.196 1.55378 302.745C0 296.595 0 290.018 0 276.863V120.368C0 107.421 0 100.947 1.50905 94.8826C2.84672 89.5066 5.05137 84.3844 8.03637 79.7175C11.4038 74.4526 16.1054 70.0027 25.5085 61.103L66.4695 22.3353Z" fill="#0A1515"/>
             <path d="M408.067 86.057L386.054 99.8277C380.69 103.183 373.729 102.439 369.195 98.0275C364.543 93.5003 363.696 86.3336 367.166 80.8472L381.045 58.9015C382.478 56.6353 383.194 55.5022 383.901 54.6526C389.227 48.2478 398.41 46.646 405.59 50.869C406.543 51.4292 407.6 52.2527 409.716 53.8998C412.376 55.9704 413.706 57.0057 414.583 57.9285C421.286 64.9834 420.71 76.2151 413.32 82.5473C412.354 83.3756 410.925 84.2694 408.067 86.057Z" fill="#00FCFC" stroke="#00FCFC" strokeWidth="0.5"/>
             <path d="M344.982 112.664L340.078 108.441C332.581 101.985 328.833 98.7575 324.6 96.4581C320.846 94.4185 316.82 92.924 312.644 92.0196C307.936 91 302.99 91 293.096 91H185.576C171.295 91 164.155 91 157.69 92.9886C151.966 94.7489 146.652 97.6337 142.058 101.474C136.868 105.812 132.978 111.8 125.198 123.775L121.623 129.279C117.301 135.932 115.14 139.258 113.61 142.843C112.252 146.026 111.266 149.356 110.67 152.765C110 156.605 110 160.571 110 168.504V212.081C110 224.74 110 231.069 111.605 236.917C113.027 242.097 115.365 246.981 118.508 251.337C122.056 256.254 126.986 260.223 136.846 268.162L181.457 304.081C188.784 309.981 192.448 312.93 196.532 315.028C200.155 316.889 204.015 318.25 208.004 319.073C212.501 320 217.204 320 226.611 320H263.769C274.368 320 279.667 320 284.676 318.841C289.117 317.812 293.376 316.115 297.307 313.808C301.741 311.205 305.588 307.561 313.283 300.272L347.514 267.847C355.803 259.995 359.948 256.069 362.916 251.425C365.547 247.309 367.491 242.791 368.67 238.05C370 232.701 370 226.992 370 215.575V167.223C370 155.078 370 149.006 368.511 143.362C367.192 138.361 365.02 133.625 362.091 129.362C358.787 124.551 354.185 120.589 344.982 112.664Z" fill="#00FCFC" stroke="#00FCFC" strokeWidth="0.5"/>
-            <path d="M212.773 321C209.041 321 207.176 321 205.424 321.428C203.87 321.807 202.387 322.432 201.031 323.279C199.502 324.234 198.199 325.57 195.593 328.241L185.821 338.258C183.302 340.84 182.043 342.131 181.143 343.628C180.345 344.956 179.758 346.4 179.402 347.907C179 349.608 179 351.411 179 355.018V375.899C179 379.506 179 381.309 179.402 383.009C179.758 384.517 180.345 385.961 181.143 387.288C182.043 388.786 183.302 390.077 185.821 392.658L203.479 410.759C206.085 413.43 207.387 414.766 208.917 415.721C210.273 416.568 211.756 417.193 213.309 417.572C215.061 418 216.927 418 220.658 418H281.165C285.627 418 287.859 418 289.902 417.409C291.711 416.885 293.406 416.025 294.897 414.874C296.581 413.574 297.899 411.773 300.534 408.172L312.369 391.996C314.088 389.647 314.947 388.472 315.557 387.184C316.099 386.04 316.493 384.833 316.731 383.591C317 382.191 317 380.735 317 377.824V355.018C317 351.411 317 349.608 316.598 347.907C316.242 346.4 315.655 344.956 314.857 343.628C313.957 342.131 312.698 340.84 310.179 338.258L300.407 328.241C297.801 325.57 296.498 324.234 294.969 323.279C293.613 322.432 292.13 321.807 290.576 321.428C288.824 321 286.959 321 283.227 321H212.773Z" fill="#7AFF60" stroke="#7AFF60" strokeWidth="0.5"/>
+            <path d="M212.773 321C209.041 321 207.176 321 205.424 321.428C203.87 321.807 202.387 322.432 201.031 323.279C199.502 324.234 198.199 325.57 195.593 328.241L185.821 338.258C183.302 340.84 182.043 342.131 181.143 343.628C180.345 344.956 179.758 346.4 179.402 347.907C179 349.608 179 351.411 179 355.018V375.899C179 379.506 179 381.309 179.402 383.009C179.758 384.517 180.345 385.961 181.143 387.288C182.043 388.786 183.302 390.077 185.821 392.658L203.479 410.759C206.085 413.43 207.387 414.766 208.917 415.721C210.273 416.568 211.756 417.193 213.309 417.572C215.061 418 216.927 418 220.658 418H281.165C285.627 418 287.859 418 289.902 417.409C291.711 416.885 293.406 416.025 294.897 414.874C296.581 413.574 297.899 411.773 300.534 408.172L312.369 391.996C314.088 389.647 314.947 388.472 315.557 387.184C316.099 386.04 316.493 384.833 316.731 383.591C317 382.191 317 380.735 317 377.824V355.018C317 351.411 317 349.608 316.598 347.907C316.242 346.4 315.655 344.956 314.857 343.628C313.957 342.131 312.698 340.84 310.179 338.258L300.407 328.241C297.801 325.57 296.498 324.234 294.969 323.279C293.613 322.432 292.13 321.807 290.576 321.428C288.824 321 286.959 321 283.227 321H212.773Z" fill="#00FCFC" stroke="#00FCFC"  strokeWidth="0.5"/>
             <path d="M68.8181 86.4637L90.8317 100.234C96.1949 103.589 103.156 102.846 107.69 98.4342C112.342 93.9071 113.189 86.7404 109.719 81.2539L95.8405 59.3082C94.4074 57.042 93.6908 55.9089 92.9843 55.0594C87.658 48.6546 78.4754 47.0527 71.2951 51.2758C70.3427 51.8359 69.2848 52.6595 67.169 54.3065C64.5091 56.3771 63.1792 57.4124 62.3024 58.3352C55.5991 65.3902 56.1751 76.6218 63.5649 82.954C64.5315 83.7823 65.9604 84.6761 68.818 86.4637Z" fill="#00FCFC" stroke="#00FCFC" strokeWidth="0.5"/>
             <path d="M294.296 177.301L310.484 156.26C314.932 150.479 317.156 147.589 319.724 146.575C322.49 145.482 325.599 145.678 328.206 147.108C330.628 148.436 332.472 151.582 336.16 157.874C338.909 162.564 340.284 164.909 340.467 167.19C340.665 169.653 339.944 172.102 338.443 174.065C337.053 175.884 334.627 177.11 329.776 179.562L306.083 191.538C302.228 193.486 297.543 192.582 294.69 189.338C291.699 185.935 291.534 180.891 294.296 177.301Z" fill="#0A1515" stroke="#00FCFC" strokeWidth="0.8"/>
             <path d="M186.753 177.301L170.565 156.26C166.117 150.479 163.893 147.589 161.325 146.575C158.559 145.482 155.45 145.678 152.843 147.108C150.421 148.436 148.577 151.582 144.889 157.874C142.14 162.564 140.765 164.909 140.582 167.19C140.384 169.653 141.105 172.102 142.606 174.065C143.996 175.884 146.422 177.11 151.273 179.562L174.966 191.538C178.821 193.486 183.506 192.582 186.359 189.338C189.35 185.935 189.516 180.891 186.753 177.301Z" fill="#0A1515" stroke="#00FCFC" strokeWidth="0.8"/>
@@ -679,24 +529,24 @@ useEffect(() => {
           <li><a href="#founder">Founder</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
-        <div className="nr">
-          <div className="sw">
-            <div className="sb">
-              <span className="si">⌕</span>
-              <input type="text" id="si" placeholder="Search..." autoComplete="off" aria-label="Search site" />
-            </div>
-            <div id="sr" role="listbox" />
+        <div className="sw">
+          <div className="sb">
+            <span className="si">⌕</span>
+            <input type="text" id="si" placeholder="Search..." autoComplete="off" aria-label="Search site" />
           </div>
-          <a href="#contact" className="nc">→ Partner With Us</a>
+          <div id="sr" role="listbox" />
         </div>
-      <button
-          className={`hb-btn${menuOpen ? " open" : ""}`}
-          onClick={() => setMenuOpen(o => !o)}
-          aria-label={menuOpen ? "Menu band karo" : "Menu kholo"}
-          aria-expanded={menuOpen}
-        >
-          <span /><span /><span />
-        </button>
+        <div className="nr">
+          <a href="#contact" className="nc">→ Partner With Us</a>
+          <button
+            className={`hb-btn${menuOpen ? " open" : ""}`}
+            onClick={() => setMenuOpen(o => !o)}
+            aria-label={menuOpen ? "Menu band karo" : "Menu kholo"}
+            aria-expanded={menuOpen}
+          >
+            <span /><span /><span />
+          </button>
+        </div>
       </nav>
 
       {/* ── Mobile Drawer ── */}
@@ -816,7 +666,6 @@ useEffect(() => {
               <div className="ab-card"><div className="ab-lbl">Type</div><div className="ab-val">Research-Driven Technology Company</div></div>
               <div className="ab-card"><div className="ab-lbl">Focus</div><div className="ab-val">Autonomous AI · Intelligent Systems</div></div>
               <div className="ab-card"><div className="ab-lbl">Status</div><div className="ab-val" style={{color:"var(--g)"}}>● Actively Researching &amp; Building</div></div>
-              <div className="ab-card"><div className="ab-lbl">Contact</div><div className="ab-val" style={{fontSize:".85rem"}}>pc113123456@gmail.com</div></div>
             </div>
             <div className="rv vi-2">
               <p className="stag">About Us</p>
@@ -1036,8 +885,15 @@ useEffect(() => {
         <div className="fl">
           <svg width={26} height={26} viewBox="0 0 479 479" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M66.4695 22.3353C75.1887 14.083 79.5483 9.95683 84.5708 7.01045C89.0246 4.39773 93.8494 2.47655 98.8801 1.3126C104.553 0 110.556 0 122.561 0H350.28C361.554 0 367.191 0 372.554 1.16752C377.31 2.20309 381.893 3.91425 386.165 6.24892C390.98 8.88104 395.238 12.5753 403.754 19.9638L450.875 60.8446C461.222 69.8222 466.396 74.3111 470.111 79.7493C473.404 84.5684 475.844 89.9168 477.327 95.5617C479 101.932 479 108.781 479 122.481V280.368C479 292.268 479 298.218 477.709 303.847C476.564 308.838 474.673 313.629 472.101 318.057C469.201 323.051 465.138 327.397 457.012 336.091L347.617 453.122C338.702 462.659 334.245 467.427 328.954 470.844C324.265 473.872 319.11 476.11 313.695 477.468C307.586 479 301.059 479 288.005 479H212.062C200.261 479 194.36 479 188.773 477.729C183.819 476.601 179.06 474.739 174.656 472.205C169.69 469.348 165.356 465.343 156.687 457.335L26.225 336.798C16.5628 327.871 11.7317 323.407 8.26913 318.092C5.20004 313.382 2.93099 308.196 1.55378 302.745C0 296.595 0 290.018 0 276.863V120.368C0 107.421 0 100.947 1.50905 94.8826C2.84672 89.5066 5.05137 84.3844 8.03637 79.7175C11.4038 74.4526 16.1054 70.0027 25.5085 61.103L66.4695 22.3353Z" fill="#0A1515"/>
-            <path d="M344.982 112.664L340.078 108.441C332.581 101.985 328.833 98.7575 324.6 96.4581C320.846 94.4185 316.82 92.924 312.644 92.0196C307.936 91 302.99 91 293.096 91H185.576C171.295 91 164.155 91 157.69 92.9886C151.966 94.7489 146.652 97.6337 142.058 101.474C136.868 105.812 132.978 111.8 125.198 123.775L121.623 129.279C117.301 135.932 115.14 139.258 113.61 142.843C112.252 146.026 111.266 149.356 110.67 152.765C110 156.605 110 160.571 110 168.504V212.081C110 224.74 110 231.069 111.605 236.917C113.027 242.097 115.365 246.981 118.508 251.337C122.056 256.254 126.986 260.223 136.846 268.162L181.457 304.081C188.784 309.981 192.448 312.93 196.532 315.028C200.155 316.889 204.015 318.25 208.004 319.073C212.501 320 217.204 320 226.611 320H263.769C274.368 320 279.667 320 284.676 318.841C289.117 317.812 293.376 316.115 297.307 313.808C301.741 311.205 305.588 307.561 313.283 300.272L347.514 267.847C355.803 259.995 359.948 256.069 362.916 251.425C365.547 247.309 367.491 242.791 368.67 238.05C370 232.701 370 226.992 370 215.575V167.223C370 155.078 370 149.006 368.511 143.362C367.192 138.361 365.02 133.625 362.091 129.362C358.787 124.551 354.185 120.589 344.982 112.664Z" fill="#00FCFC"/>
-            <path d="M212.773 321H283.227C286.959 321 288.824 321 290.576 321.428C292.13 321.807 293.613 322.432 294.969 323.279C296.498 324.234 297.801 325.57 300.407 328.241L310.179 338.258C312.698 340.84 313.957 342.131 314.857 343.628C315.655 344.956 316.242 346.4 316.598 347.907C317 349.608 317 351.411 317 355.018V377.824C317 380.735 317 382.191 316.731 383.591C316.493 384.833 316.099 386.04 315.557 387.184C314.947 388.472 314.088 389.647 312.369 391.996L300.534 408.172C297.899 411.773 296.581 413.574 294.897 414.874C293.406 416.025 291.711 416.885 289.902 417.409C287.859 418 285.627 418 281.165 418H220.658C216.927 418 215.061 418 213.309 417.572C211.756 417.193 210.273 416.568 208.917 415.721C207.387 414.766 206.085 413.43 203.479 410.759L185.821 392.658C183.302 390.077 182.043 388.786 181.143 387.288C180.345 385.961 179.758 384.517 179.402 383.009C179 381.309 179 379.506 179 375.899V355.018C179 351.411 179 349.608 179.402 347.907C179.758 346.4 180.345 344.956 181.143 343.628C182.043 342.131 183.302 340.84 185.821 338.258L195.593 328.241C198.199 325.57 199.502 324.234 201.031 323.279C202.387 322.432 203.87 321.807 205.424 321.428C207.176 321 209.041 321 212.773 321Z" fill="#7AFF60"/>
+            <path d="M408.067 86.057L386.054 99.8277C380.69 103.183 373.729 102.439 369.195 98.0275C364.543 93.5003 363.696 86.3336 367.166 80.8472L381.045 58.9015C382.478 56.6353 383.194 55.5022 383.901 54.6526C389.227 48.2478 398.41 46.646 405.59 50.869C406.543 51.4292 407.6 52.2527 409.716 53.8998C412.376 55.9704 413.706 57.0057 414.583 57.9285C421.286 64.9834 420.71 76.2151 413.32 82.5473C412.354 83.3756 410.925 84.2694 408.067 86.057Z" fill="#00FCFC" stroke="#00FCFC" strokeWidth="0.5"/>
+            <path d="M344.982 112.664L340.078 108.441C332.581 101.985 328.833 98.7575 324.6 96.4581C320.846 94.4185 316.82 92.924 312.644 92.0196C307.936 91 302.99 91 293.096 91H185.576C171.295 91 164.155 91 157.69 92.9886C151.966 94.7489 146.652 97.6337 142.058 101.474C136.868 105.812 132.978 111.8 125.198 123.775L121.623 129.279C117.301 135.932 115.14 139.258 113.61 142.843C112.252 146.026 111.266 149.356 110.67 152.765C110 156.605 110 160.571 110 168.504V212.081C110 224.74 110 231.069 111.605 236.917C113.027 242.097 115.365 246.981 118.508 251.337C122.056 256.254 126.986 260.223 136.846 268.162L181.457 304.081C188.784 309.981 192.448 312.93 196.532 315.028C200.155 316.889 204.015 318.25 208.004 319.073C212.501 320 217.204 320 226.611 320H263.769C274.368 320 279.667 320 284.676 318.841C289.117 317.812 293.376 316.115 297.307 313.808C301.741 311.205 305.588 307.561 313.283 300.272L347.514 267.847C355.803 259.995 359.948 256.069 362.916 251.425C365.547 247.309 367.491 242.791 368.67 238.05C370 232.701 370 226.992 370 215.575V167.223C370 155.078 370 149.006 368.511 143.362C367.192 138.361 365.02 133.625 362.091 129.362C358.787 124.551 354.185 120.589 344.982 112.664Z" fill="#00FCFC" stroke="#00FCFC" strokeWidth="0.5"/>
+            <path d="M212.773 321C209.041 321 207.176 321 205.424 321.428C203.87 321.807 202.387 322.432 201.031 323.279C199.502 324.234 198.199 325.57 195.593 328.241L185.821 338.258C183.302 340.84 182.043 342.131 181.143 343.628C180.345 344.956 179.758 346.4 179.402 347.907C179 349.608 179 351.411 179 355.018V375.899C179 379.506 179 381.309 179.402 383.009C179.758 384.517 180.345 385.961 181.143 387.288C182.043 388.786 183.302 390.077 185.821 392.658L203.479 410.759C206.085 413.43 207.387 414.766 208.917 415.721C210.273 416.568 211.756 417.193 213.309 417.572C215.061 418 216.927 418 220.658 418H281.165C285.627 418 287.859 418 289.902 417.409C291.711 416.885 293.406 416.025 294.897 414.874C296.581 413.574 297.899 411.773 300.534 408.172L312.369 391.996C314.088 389.647 314.947 388.472 315.557 387.184C316.099 386.04 316.493 384.833 316.731 383.591C317 382.191 317 380.735 317 377.824V355.018C317 351.411 317 349.608 316.598 347.907C316.242 346.4 315.655 344.956 314.857 343.628C313.957 342.131 312.698 340.84 310.179 338.258L300.407 328.241C297.801 325.57 296.498 324.234 294.969 323.279C293.613 322.432 292.13 321.807 290.576 321.428C288.824 321 286.959 321 283.227 321H212.773Z" fill="#00FCFC" stroke="#00FCFC"  strokeWidth="0.5"/>
+            <path d="M68.8181 86.4637L90.8317 100.234C96.1949 103.589 103.156 102.846 107.69 98.4342C112.342 93.9071 113.189 86.7404 109.719 81.2539L95.8405 59.3082C94.4074 57.042 93.6908 55.9089 92.9843 55.0594C87.658 48.6546 78.4754 47.0527 71.2951 51.2758C70.3427 51.8359 69.2848 52.6595 67.169 54.3065C64.5091 56.3771 63.1792 57.4124 62.3024 58.3352C55.5991 65.3902 56.1751 76.6218 63.5649 82.954C64.5315 83.7823 65.9604 84.6761 68.818 86.4637Z" fill="#00FCFC" stroke="#00FCFC" strokeWidth="0.5"/>
+            <path d="M294.296 177.301L310.484 156.26C314.932 150.479 317.156 147.589 319.724 146.575C322.49 145.482 325.599 145.678 328.206 147.108C330.628 148.436 332.472 151.582 336.16 157.874C338.909 162.564 340.284 164.909 340.467 167.19C340.665 169.653 339.944 172.102 338.443 174.065C337.053 175.884 334.627 177.11 329.776 179.562L306.083 191.538C302.228 193.486 297.543 192.582 294.69 189.338C291.699 185.935 291.534 180.891 294.296 177.301Z" fill="#0A1515" stroke="#00FCFC" strokeWidth="0.8"/>
+            <path d="M186.753 177.301L170.565 156.26C166.117 150.479 163.893 147.589 161.325 146.575C158.559 145.482 155.45 145.678 152.843 147.108C150.421 148.436 148.577 151.582 144.889 157.874C142.14 162.564 140.765 164.909 140.582 167.19C140.384 169.653 141.105 172.102 142.606 174.065C143.996 175.884 146.422 177.11 151.273 179.562L174.966 191.538C178.821 193.486 183.506 192.582 186.359 189.338C189.35 185.935 189.516 180.891 186.753 177.301Z" fill="#0A1515" stroke="#00FCFC" strokeWidth="0.8"/>
+            <path d="M237.743 273.921C241.223 278.595 242.963 280.932 245.1 281.766C246.971 282.497 249.049 282.497 250.92 281.766C253.057 280.932 254.797 278.595 258.277 273.921L259.99 271.62C264.892 265.036 267.343 261.744 267.279 258.99C267.223 256.594 266.096 254.348 264.207 252.872C262.036 251.176 257.931 251.176 249.723 251.176H246.297C238.088 251.176 233.984 251.176 231.813 252.872C229.924 254.348 228.796 256.594 228.741 258.99C228.677 261.744 231.128 265.036 236.03 271.62L237.743 273.921Z" fill="#0A1515"/>
+            <path d="M218.578 311.663L217.142 312.883C213.913 315.627 212.299 316.998 212.179 318.204C212.089 319.117 212.421 320.021 213.081 320.658C213.953 321.5 216.071 321.5 220.308 321.5H275.692C279.929 321.5 282.047 321.5 282.919 320.658C283.579 320.021 283.911 319.117 283.821 318.204C283.701 316.998 282.087 315.627 278.858 312.883L277.422 311.663C276.899 311.219 276.638 310.997 276.342 310.842C276.111 310.721 275.865 310.631 275.61 310.574C275.284 310.5 274.942 310.5 274.256 310.5H221.744C221.058 310.5 220.716 310.5 220.39 310.574C220.135 310.631 219.889 310.721 219.658 310.842C219.362 310.997 219.101 311.219 218.578 311.663Z" fill="#0A1515" stroke="#00FCFC" strokeWidth="0.4"/>
+            <path d="M248 281V320" stroke="#00FCFC" strokeWidth="1.2"/>
           </svg>
           <span className="fl-t">Lion<span> Tech</span></span>
         </div>
